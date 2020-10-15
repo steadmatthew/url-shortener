@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>URL Shortener</title>
+        <%- include('./partials/navbar') %>
+    </head>
+    <body>
+        <form action="/u/create" method='POST'>
+            <label for="url">URL</label>
+            <input type="text" id="url" name="url"><br><br>
+            <input type="submit" value="Shorten!">
+        </form>
+    </body>
+</html>

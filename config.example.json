@@ -1,0 +1,5 @@
+{
+    "mongoURI": "mongoDB url",
+    "port": 80,
+    "check": true
+}
