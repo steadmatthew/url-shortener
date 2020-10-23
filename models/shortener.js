@@ -4,7 +4,7 @@ const ShortenerSchema = new mongoose.Schema({
   url: {
     type: String,
   },
-  id: {
+  _id: {
     type: String,
   },
 });

@@ -23,9 +23,9 @@ app.get('/', (req, res) => {
 
 app.get('/u/:ID', async (req, res) => {
   const ID = req.params.ID;
-  const {url} = await Schema.findOne({id: ID});
-  if (!url) return res.status(404).render('404.ejs');
-  res.render('redir.ejs', {url: url});
+  const find = await Schema.findOne({_id: ID});
+  if (!find) return res.status(404).render('404.ejs');
+  res.render('redir.ejs', {url: find.url});
 });
 
 app.post('/u/create', async (req, res) => {
@@ -34,15 +34,15 @@ app.post('/u/create', async (req, res) => {
   // eslint-disable-next-line max-len
   const FoundCheck = await Schema.findOne({url: req.body.url}).then((doc) => doc);
   if (config.check && FoundCheck) {
-    res.status(409).render('exists.ejs', {
+    return res.status(409).render('exists.ejs', {
       id: FoundCheck.id,
     });
   }
-  const shortener = new Schema({
+  const s = new Schema({
     url: req.body.url,
-    id: id,
+    _id: id,
   });
-  shortener.save();
+  s.save();
   res.status(201).render('created.ejs', {
     id: id,
   });
